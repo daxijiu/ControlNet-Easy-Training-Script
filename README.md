@@ -58,7 +58,7 @@ As can be seen, prompts, reference images, and desired result images with the sa
 
 ### Step 4 - Prepare the Basic Training Model
 Similar to fine-tuning Stable Diffusion model, training ControlNet requires a basic model. If you have a basic model based on the SD1.5 architecture, put it under '\models\' and name it 'basemodel_sd15.ckpt'. If you have a basic model based on the SD2.1 architecture, put it under '\models\' and name it 'basemodel_sd21.ckpt'. Take SD1.5 as an example:  
-![p](readme_res/6.png)
+![p](readme_res/6.png)  
 If you want your trained model to have better generalization, it is recommended to use the original SD1.5 model as the basis. If your training content and style are closely related, you need to use a basic model that is closer to the style (for example, for anime-style content, you can use the Anything series).   
 
 ### Step 5 - Training
