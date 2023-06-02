@@ -69,6 +69,7 @@ If your base model is based on SD2.1, you can run the following script to start 
 It's that simple!  
 
 Normally, training will proceed automatically. If you want to make some modifications to the training parameters, you can change some parameters in 'config.py'.  
+
     save_memory = False //Enable low VRAM mode, which can be turned on for devices with less than 16GB of VRAM.  
     batch_size = 4 The //number of samples learned per step.  
     not_logger = False //Disable automatic testing of training results. Setting it to False means enabling automatic testing, which will test the model after each logger_freq steps.  
