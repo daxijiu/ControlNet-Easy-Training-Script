@@ -85,14 +85,15 @@ Normally, training will proceed automatically. If you want to make some modifica
     only_mid_control = False //Advanced parameters to only train the middle layer of the SD model (without training the decoder).  
 
 There are a few points to note:  
-- If your base model is based on SD1.5, you can get good results with about 4000-6000 training steps.  
-- If your base model is based on SD2.1, you can get good results with about 6000-9000 training steps.  
+- If your base model is based on SD1.5, the results converged after training for approximately 4000~6000 steps..  
+- If your base model is based on SD2.1, the results converged after training for approximately 6000~9000 steps..  
 - Changing the calculation precision to fp16 often leads to a decrease in training performance (perhaps increasing the number of training steps can solve this, but this requires experimentation). If it is not necessary, please do not change the calculation precision. This parameter is not included in 'config.py'. If you want to try, you can change it in 'tutorial_train.py' or 'tutorial_train_sd21.py'.  
 - There are two parameters that determine the number of training steps: 'max_steps' and 'max_epochs', and the earlier one is used.  
 - 'not_logger = False' will have some impact on performance. If you don't need to check the training results regularly, you can turn it off by setting 'not_logger = True'.  
 - It is recommended to use a graphics card with 16GB or more of memory. 8GB memory is theoretically feasible, but you may need to do some optimization yourself.  
 - In this minimal example with 400 samples and a batch of 4, it takes about 5-6 minutes on an RTX 4090, which is about 1000 steps/hour.  
 - In fact, a normal training session takes about 4-5 hours on an RTX 4090 with 5000 steps.  
+- The training samples of ControlNet official model are typically in the range of hundreds of thousands to millions, and the typical training time is around 200 A100 hours.
 
 ### Step 6 - Validate Training Results
 After the training is completed, the model is saved by default in '\output\'.  
