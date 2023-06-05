@@ -109,14 +109,15 @@ Stable Diffusion的基础模型已经有了大量的认知，比如"cyan"青色,
     only_mid_control = False 高阶参数，只训练SD的中间层（而不训练解码器）  
 
 有几点需要注意：  
-如果你的基础模型是基于SD1.5的，训练步数大概在4000-6000步左右可以获得较好的结果。  
-如果你的基础模型是基于SD2.1的，训练步数大概在6000-9000步左右可以获得较好的结果。  
+如果你的基础模型是基于SD1.5的，训练步数大概在4000-6000步左右结果开始收敛。  
+如果你的基础模型是基于SD2.1的，训练步数大概在6000-9000步左右结果开始收敛。  
 计算精度如果改成fp16往往会导致训练效果下降（或许增加训练的步数可以解决，这需要尝试），如果不是非常必要请不要改。计算精度这个参数不放在'config.py'里了，如果想尝试可以去'tutorial_train.py'或者'tutorial_train_sd21.py'里自己改。  
 上述参数有两个决定了训练的步数，一个是'max_steps'一个是'max_epochs'以先到达的为准。  
 'not_logger = False'会对性能有一些影响，如果不需要定期查看训练结果可以关闭'not_logger = True'即可。  
 建议使用显存16G或更多的显卡，8G显存理论上可行，但是可能需要自行做一些优化了。  
 本文的这个极小的例子400个样本batch=4也就是100步，在一张RTX 4090上大约需要5-6分钟，也就是大1000步/小时。  
-事实上一次正常的训练按照5000步算的话RTX 4090上大约需要4-5小时。    
+事实上一次正常的训练按照5000步算的话RTX 4090上大约需要4-5小时。  
+注意：官方ControlNet v1.1系列的模型训练样本大约在几十万~上百万量级，训练的典型时间是大约是200 A100小时（你用8块A100的话，一天就能完成，也不是很久......）。  
 
 ### 第六步-验证训练结果  
 训练完成后的模型默认保存在'\output\'  
@@ -128,7 +129,7 @@ Stable Diffusion的基础模型已经有了大量的认知，比如"cyan"青色,
 2.SD1.5训练时需要的CLIP模型openai--clip-vit-large-patch14模型（这个没有的话会自动从[huggingface.co](https://huggingface.co/openai/clip-vit-large-patch14/tree/main)下载）当然你也可以手动下载。  
 3.如果你需要基于SD2.1训练，可以在“[这里](https://huggingface.co/stabilityai/stable-diffusion-2-1-base/tree/main)”下载SD2.1的原版模型'v2-1_512-ema-pruned.ckpt'，以及SD2.1所需的CLIP模型'CLIP-ViT-H-14-laion2B-s32B-b79K'在“[这里](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/tree/main)”。  
 4.我没有使用xFormers，因为我自己测试下来使用了xFormers反而会导致的效率下降，当然也可能是优化问题。  
-5.大部分代码都是搬运自ControlNet原作者lllyasviel的[代码](https://github.com/lllyasviel/ControlNet)，我只是在借助搜索引擎和ChatGPT帮助下做了Pytroch 2.0的适配和流程的整合使得它更好用。  
+5.大部分代码都是搬运自ControlNet原作者lllyasviel的[代码](https://github.com/lllyasviel/ControlNet)，我只是在借助搜索引擎和ChatGPT帮助下做了Pytorch 2.0的适配和流程的整合使得它更好用。  
 6.想要了解更多的细节，可以详细阅读ControlNet原作者的“[这篇文档](https://github.com/lllyasviel/ControlNet/blob/main/docs/train.md)”和“[这篇文章](https://arxiv.org/abs/2302.05543)”。  
 7.训练过程的各项参数和设置，可以阅读[Pytorch Lightning](https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.trainer.trainer.Trainer.html#trainer)的官方文档。  
 
